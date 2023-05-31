@@ -1,7 +1,7 @@
 "use strict";
 
 const text = document.querySelector('.text');
-text.style.cssText = 'display:flex;flex-direction:column;aline-items:center;';
+
 const dayTime = {
 	date: new Date(),
 	options :{ weekday: 'long'},
@@ -47,8 +47,9 @@ const dayTime = {
 	
 };
 
+text.style.cssText = 'display:flex;flex-direction:column;aline-items:center;';
 text.insertAdjacentHTML('afterbegin', `<h2>${dayTime.greetings()}</h2>
 													<h2>${dayTime.getWeekDay()}</h2>
 													<h2>${dayTime.getTimeNow()}</h2>
-													<h2>${dayTime.toNewYearDays()}</h2>`)
+													<h2>${dayTime.toNewYearDays()}</h2>`);
 
