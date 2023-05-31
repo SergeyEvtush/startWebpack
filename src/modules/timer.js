@@ -1,5 +1,5 @@
 const timer = (deadLine) => {
-	console.log(deadLine);
+	/* console.log(deadLine); */
 	
 	const timerHours = document.getElementById('timer-hours');
 	const timerMinutes = document.getElementById('timer-minutes');
@@ -34,17 +34,40 @@ const timer = (deadLine) => {
 		
 	};
 
+	const nullBeforeNumber = (number) => { 
+		if (number > 9) {
+			return number;
+		} else { 
+			return `0${number}`;
+		}
+	}
+	const returnNull = (number,elem) => {
+		if (number <= 0) {
+			elem.innerText = '00';
+		} else { 
+			elem.textContent=nullBeforeNumber(number);
+		}
+	 }
+
 	const updateClock = () => {
 		let getTime = getTimeRemaning();
-
-		timerDays.textContent = getTime.days;
-		timerHours.textContent = getTime.hours;
-		timerMinutes.textContent = getTime.minutes;
-		timerSeconds.textContent = getTime.seconds;
+		
+		 	 returnNull(getTime.days,timerDays);
+			 returnNull(getTime.hours,timerHours);
+			 returnNull(getTime.minutes,timerMinutes);
+			 returnNull(getTime.seconds,timerSeconds); 
+		console.log('new function');
+		
 	};
-	if (getTime.timeRemaining > 0) {
-		setTimeout(updateClock, 1000);
-	 }
+	const setIntervalCock = () => {
+		let getTime = getTimeRemaning();
+		let idInterval = setInterval(updateClock, 1000);
+		if (getTime.timeRemaining < 0) {
+			clearInterval(idInterval);
+			updateClock();
+		} 
+	};
+	setIntervalCock();
 	
 };
 
