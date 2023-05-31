@@ -1,1 +1,0 @@
-(()=>{"use strict";(()=>{const o="my slider";console.log(o),console.log(o),console.log(o)})()})();
