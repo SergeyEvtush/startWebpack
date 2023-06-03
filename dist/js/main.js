@@ -16,7 +16,37 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ \"./modules/timer.js\");\n\r\n\r\n(0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('30 may 2023');\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ \"./modules/timer.js\");\n/* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/menu */ \"./modules/menu.js\");\n/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modal */ \"./modules/modal.js\");\n\r\n\r\n\r\n\r\n(0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('30 may 2023');\r\n(0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\r\n(0,_modules_modal__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n\n//# sourceURL=webpack:///./index.js?");
+
+/***/ }),
+
+/***/ "./modules/animation.js":
+/*!******************************!*\
+  !*** ./modules/animation.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   animateRight: () => (/* binding */ animateRight),\n/* harmony export */   animationMoveLeft: () => (/* binding */ animationMoveLeft)\n/* harmony export */ });\nconst animationMoveLeft = (classElement, startValue, speed, stopValue, el) => {\r\n\t\r\n\tconst element = document.querySelector(classElement);\r\n\tel.style.display = \"block\";\r\n\t\r\n\telement.style.left = startValue+'px';\r\n\t\r\n\t\r\n\tlet idAnimation;\r\n\tlet count = 0;\r\n\tconst animate = () => {\r\n\t\tcount+=speed;\r\n\t\tidAnimation = requestAnimationFrame(animate);\r\n\t\tif (count < stopValue) {\r\n\t\t\telement.style.left = count + `px`;\r\n\t\t\t\r\n\t\t}\r\n\t\telse {\r\n\t\t\tcancelAnimationFrame(idAnimation);\r\n\t\t} \r\n\t};\r\n\tanimate();\r\n};\r\n\r\nconst animateRight = (classElement,speed,el) => {\r\n\tconst element = document.querySelector(classElement);\r\n\tlet idAnimation;\r\n\tlet count = element.getBoundingClientRect().left;\r\n\r\n\tconst addDisplayNone = (ell) => {\r\n\t\tell.style.display = \"none\";\r\n\t}\r\n\t\r\n\tconst animate = () => {\r\n\t\tcount = count - speed;\r\n\t\tidAnimation = requestAnimationFrame(animate);\r\n\t\tif (count > 0) {\r\n\t\t\telement.style.left = count + `px`;\r\n\t\t}\r\n\t\tif (count <= 0) {\r\n\t\t\taddDisplayNone(el);\r\n\t\t\telement.style.left = \"0px\";\r\n\t\t\tcancelAnimationFrame(idAnimation);\r\n\t\t}\r\n\t};\r\n\tanimate();\r\n\t\r\n};\r\n\r\n\n\n//# sourceURL=webpack:///./modules/animation.js?");
+
+/***/ }),
+
+/***/ "./modules/menu.js":
+/*!*************************!*\
+  !*** ./modules/menu.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n\r\n\r\nconst menu = () => {\r\n\tconst menuBtn = document.querySelector('.menu');\r\n\tconst menu = document.querySelector('menu');\r\n\tconst closeBtn = menu.querySelector('.close-btn');\r\n\tconst menuItems = menu.querySelectorAll('ul>li>a');\r\n\r\n\tconst handleMenu = () => {\r\n\t\tmenu.classList.toggle('active-menu');\r\n\t};\r\n\r\n\tmenuBtn.addEventListener('click', handleMenu);\r\n\r\n\tcloseBtn.addEventListener('click', handleMenu);\r\n\r\n\tmenuItems.forEach((el) => el.addEventListener('click', handleMenu));\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);\r\n\n\n//# sourceURL=webpack:///./modules/menu.js?");
+
+/***/ }),
+
+/***/ "./modules/modal.js":
+/*!**************************!*\
+  !*** ./modules/modal.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _modules_animation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../modules/animation */ \"./modules/animation.js\");\n\r\n\r\n\r\nconst modal = () => {\r\n\tconst buttons = document.querySelectorAll('.popup-btn');\r\n\tconst modal = document.querySelector('.popup');\r\n\tconst popupClose = modal.querySelector('.popup-close');\r\n\tconst screenWidth=window.innerWidth;\r\n\t\r\n\t\r\n\r\n\r\n\t\r\n\tbuttons.forEach(el => {\r\n\t\tel.addEventListener('click', () => {\r\n\t\t\t\r\n\t\t\tif (screenWidth > 768) {\r\n\t\t\t\t(0,_modules_animation__WEBPACK_IMPORTED_MODULE_0__.animationMoveLeft)('.popup-content', 0, 10, 650, modal);\r\n\t\t\t} else { \r\n\t\t\t\tmodal.style.display = \"block\";\r\n\t\t\t}\r\n\t\t\t\r\n\t\t });\r\n\t});\r\n\tpopupClose.addEventListener('click', () => { \r\n\t\tif (screenWidth > 768) {\r\n\t\t\t(0,_modules_animation__WEBPACK_IMPORTED_MODULE_0__.animateRight)('.popup-content', 10, modal);\r\n\t\t} else { \r\n\t\t\tmodal.style.display = \"none\";\r\n\t\t}\r\n\t\t\r\n\t});\r\n };\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);\n\n//# sourceURL=webpack:///./modules/modal.js?");
 
 /***/ }),
 

@@ -20,7 +20,6 @@ const dayTime = {
 			return this.night;
 		}
 	},
-	
 	getWeekDay() {
 		return `Сегодня: ${this.date.toLocaleDateString('ru-RU', this.options)}`;
 	},
@@ -44,7 +43,6 @@ const dayTime = {
 		const days = Math.floor(subtractionRes/1000 / 60 / 60 / 24);
 		return `До нового года осталось: ${days} дней`;
 	}
-	
 };
 
 text.style.cssText = 'display:flex;flex-direction:column;aline-items:center;';
