@@ -1,8 +1,9 @@
-export const animationMoveLeft = (classElement, startValue, speed, stopValue, el) => {
+export const animationMoveLeft = (classElement, startValue, speed,el) => {
 	
 	const element = document.querySelector(classElement);
 	el.style.display = "block";
-	
+	const elemWidth = element.getBoundingClientRect();
+	const windowWidth = window.innerWidth;
 	element.style.left = startValue+'px';
 	
 	
@@ -11,7 +12,7 @@ export const animationMoveLeft = (classElement, startValue, speed, stopValue, el
 	const animate = () => {
 		count+=speed;
 		idAnimation = requestAnimationFrame(animate);
-		if (count < stopValue) {
+		if (count < (windowWidth-elemWidth.width)/2) {
 			element.style.left = count + `px`;
 			
 		}

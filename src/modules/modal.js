@@ -15,7 +15,7 @@ const modal = () => {
 		el.addEventListener('click', () => {
 			
 			if (screenWidth > 768) {
-				animationMoveLeft('.popup-content', 0, 10, 650, modal);
+				animationMoveLeft('.popup-content', 0, 10,modal);
 			} else { 
 				modal.style.display = "block";
 			}
