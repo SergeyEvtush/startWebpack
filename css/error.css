@@ -1,0 +1,5 @@
+.iserror{
+	border: solid red 1px;
+	color:red;
+	font-weight: bold;
+}
