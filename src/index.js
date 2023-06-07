@@ -3,6 +3,7 @@ import menu from './modules/menu';
 import modal from './modules/modal';
 import calculator from './modules/calculator';
 import tabs from './modules/tabs';
+import slider from './modules/slider';
 import {form1,form2,form3 } from './modules/forms';
 
 timer('30 may 2023');
@@ -13,3 +14,4 @@ form1();
 form2();
 form3();
 tabs();
+slider('.portfolio-content','.portfolio-item');
