@@ -63,3 +63,8 @@ export const isError = (elem, bool) => {
 		return false;
 	}
 };
+
+export const scrollingToView = (targetElement,scrollOptions) => {
+	const elem = document.querySelector(`#${getNameOfBlock(targetElement)}`)
+	elem.scrollIntoView(scrollOptions);//
+ }

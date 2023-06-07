@@ -1,36 +1,42 @@
-import { getNameOfBlock } from "/modules/functions";
+import { getNameOfBlock,scrollingToView } from "/modules/functions";
 
 const menu = () => {
-	const menuBtn = document.querySelector('.menu');
 	const menu = document.querySelector('menu');
-	const closeBtn = menu.querySelector('.close-btn');
 	const menuItems = menu.querySelectorAll('ul>li>a');
-	const mainLink = document.querySelector('main>a');
+	const main = document.querySelector('main');
 	
 	
 	const handleMenu = () => {
 		menu.classList.toggle('active-menu');
-		
 	};
-	
-	menuBtn.addEventListener('click', handleMenu);
-
-	closeBtn.addEventListener('click', handleMenu);
-
-	menuItems.forEach((el) => el.addEventListener('click', (e) => {
-		e.preventDefault();
+	main.addEventListener('click', (e) => {
 		const target = e.target;
-		const targetClass = "#" + getNameOfBlock(target);
-		const targetElem = document.querySelector(targetClass);
-		 targetElem.scrollIntoView({behavior: "smooth"});
-		handleMenu();
-	}));
-	mainLink.addEventListener("click", (e) => { 
-		e.preventDefault();
-		const target = e.target;
-		const targetClass = "#" + getNameOfBlock(target.parentElement);
-		const targetElem = document.querySelector(targetClass);
-		 targetElem.scrollIntoView({behavior: "smooth"});
+		if (menu.classList.contains('active-menu')) { 
+			handleMenu();
+		}
+		if (target.closest('.menu')) { 
+			handleMenu();
+		}
+		if (target.closest('a')) { 
+			e.preventDefault();
+			scrollingToView(target.parentElement, { behavior: "smooth" });
+		}
 	});
+	menu.addEventListener('click', (e) => { 
+		e.preventDefault();
+		const target = e.target;
+		if (target.closest('.active-menu')&&target!==menu) { 
+			if (!target.classList.contains('close-btn') && target.hasAttribute('href')) {
+				scrollingToView(target, { behavior: "smooth" });
+				handleMenu();
+			}
+			if (target.classList.contains('close-btn')) {
+				handleMenu();
+			 }
+		}
+		
+	});
+
+
 };
 export default menu;
