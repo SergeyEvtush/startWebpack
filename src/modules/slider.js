@@ -47,7 +47,6 @@ const slider = (sliderBlockClass, slidesClass) => {
 		sliderBlock.addEventListener('click', (e) => {
 			e.preventDefault();
 			const target = e.target;
-	
 			if (!target.matches('.dot,.portfolio-btn')) {
 				return;
 			}
@@ -93,8 +92,6 @@ const slider = (sliderBlockClass, slidesClass) => {
 		console.log(slides);
 		return
 	} else {
-		console.log(sliderBlock);
-		console.log(slides);
 		createSlider();
 	 }
 				

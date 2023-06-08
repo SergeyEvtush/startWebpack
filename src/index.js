@@ -9,7 +9,7 @@ import {form1,form2,form3 } from './modules/forms';
 timer('30 may 2023');
 menu();
 modal();
-calculator();
+calculator(100);
 form1();
 form2();
 form3();
