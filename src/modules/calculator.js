@@ -10,10 +10,12 @@ const calculator = (price=100) => {
 	 total = calcBlock.querySelector('#total');
 
 	
+	
 	const coutCalc = () => {
 		const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
 		const calcSquareValue = +calcSquare.value;
-
+		let idInterval;
+		let startValue = 0;
 		let totalValue = 0;
 		let countCalcValue = 1;
 		let calDayValue = 1;
@@ -27,23 +29,36 @@ const calculator = (price=100) => {
 		 }
 		if (calcType.value && calcSquare.value&&calcCount.value&&calcDay.value) {
 			totalValue = price * calcTypeValue * calcSquareValue * countCalcValue * calDayValue;
-			for(let i=0;i<totalValue;i++)
-			{
-				setTimeout(() => { total.textContent = i}, 1000);
+				console.log(totalValue);
 				
-			}
+		
 		} else { 
 			totalValue = 0;
 		}
+		idInterval=setInterval(() => {
+			if (startValue < totalValue) {
+				if (totalValue > 50000) {
+					startValue += 10;
+				} else {
+					startValue+=5;
+				 }
+				
+				total.textContent = startValue;
+			} else { 
+				clearInterval(idInterval);
+			}
+		}, 1);
 		
 		
 	};
+
 	calcInput.forEach(el => {
 		el.addEventListener('input', (e) => { 
 			e.preventDefault();
 			isNumber(el);
 		});
 	});
+	
 
 	calcBlock.addEventListener('input', (e) => { 
 		const target = e.target;
