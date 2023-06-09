@@ -1,4 +1,4 @@
-import { isNumber,isRus,isEmail,isFullName } from "/modules/functions";
+import { isNumber,isRus,isEmail,isFullName } from "/modules/helpers";
 
 
 export const form1 = () => { 

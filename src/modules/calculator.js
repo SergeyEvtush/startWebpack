@@ -1,5 +1,5 @@
-import { isNumber } from "/modules/functions";
-import { animateNumbers } from "/modules/animation";
+
+import { animate,isNumber } from '/modules/helpers';
 
 const calculator = (price=100) => {
 	const calcBlock = document.querySelector('.calc-block'),
@@ -31,7 +31,16 @@ const calculator = (price=100) => {
 		} else { 
 			totalValue = 0;
 		}
-		animateNumbers(1,0,totalValue,[5,10],total);
+		
+		animate({
+			duration: 1500,
+			timing(timeFraction) {
+				return timeFraction;
+			},
+			draw(progress) {
+				total.textContent = Math.round(progress * totalValue);
+			}
+		});
 	};
 
 	calcInput.forEach(el => {

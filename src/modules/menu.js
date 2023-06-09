@@ -1,8 +1,7 @@
-import { getNameOfBlock,scrollingToView } from "/modules/functions";
+import {scrollingToView } from "/modules/helpers";
 
 const menu = () => {
 	const menu = document.querySelector('menu');
-	const menuItems = menu.querySelectorAll('ul>li>a');
 	const main = document.querySelector('main');
 	
 	

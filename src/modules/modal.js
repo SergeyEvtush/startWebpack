@@ -1,4 +1,4 @@
-import { animationMoveLeft,animateRight } from '/modules/animation';
+import { animate } from '/modules/helpers';
 
 
 const modal = () => {
@@ -10,7 +10,17 @@ const modal = () => {
 		el.addEventListener('click', () => {
 			
 			if (screenWidth > 768) {
-				animationMoveLeft('.popup-content', 0, 10,modal);
+				
+				modal.style.display = 'block';
+				animate({
+					duration: 1500,
+					timing(timeFraction) {
+						return -Math.pow((11 - 6 * 0 - 11 * timeFraction) / 4, 2) + Math.pow(1, 2);
+					},
+					draw(progress) {
+						document.querySelector('.popup-content').style.cssText = `left:${progress * 50 + '%'};opacity:${progress};`
+					}
+				});
 			} else { 
 				modal.style.display = "block";
 			}
@@ -22,7 +32,23 @@ const modal = () => {
 		const target = e.target;
 		if (!e.target.closest('.popup-content')||target.classList.contains('popup-close')) { 
 			if (screenWidth > 768) {
-				animateRight('.popup-content', 10, modal);
+				
+				animate({
+					duration: 2000,
+					timing(timeFraction) {
+					  return timeFraction;
+					},
+					draw(progress) {
+
+						document.querySelector('.popup-content').style.cssText = `left:${50 - (progress * 50) + '%'};opacity:${1-progress}`;
+						
+						
+					}
+				});
+				setTimeout(() => {
+					modal.style.display = 'none';
+				}, 2000);
+				 
 			} else { 
 				modal.style.display = "none";
 			}
