@@ -30,7 +30,7 @@ const timer = (deadLine) => {
 			hours,
 			minutes,
 			seconds
-		}
+		};
 		
 	};
 
