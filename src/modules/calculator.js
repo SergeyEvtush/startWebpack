@@ -1,4 +1,5 @@
-import { isError,isNumber } from "/modules/functions";
+import { isNumber } from "/modules/functions";
+import { animateNumbers } from "/modules/animation";
 
 const calculator = (price=100) => {
 	const calcBlock = document.querySelector('.calc-block'),
@@ -14,8 +15,6 @@ const calculator = (price=100) => {
 	const coutCalc = () => {
 		const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
 		const calcSquareValue = +calcSquare.value;
-		let idInterval;
-		let startValue = 0;
 		let totalValue = 0;
 		let countCalcValue = 1;
 		let calDayValue = 1;
@@ -29,27 +28,10 @@ const calculator = (price=100) => {
 		 }
 		if (calcType.value && calcSquare.value&&calcCount.value&&calcDay.value) {
 			totalValue = price * calcTypeValue * calcSquareValue * countCalcValue * calDayValue;
-				console.log(totalValue);
-				
-		
 		} else { 
 			totalValue = 0;
 		}
-		idInterval=setInterval(() => {
-			if (startValue < totalValue) {
-				if (totalValue > 50000) {
-					startValue += 10;
-				} else {
-					startValue+=5;
-				 }
-				
-				total.textContent = startValue;
-			} else { 
-				clearInterval(idInterval);
-			}
-		}, 1);
-		
-		
+		animateNumbers(1,0,totalValue,[5,10],total);
 	};
 
 	calcInput.forEach(el => {

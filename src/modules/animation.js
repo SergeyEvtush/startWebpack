@@ -48,3 +48,21 @@ export const animateRight = (classElement,speed,el) => {
 	
 };
 
+export const animateNumbers = (interval, startingValue, tValue, countValue, element) => {
+	let idInterval;
+	let count;
+	idInterval = setInterval(() => {
+		if (startingValue < tValue) {
+			if (tValue > 50000) {
+				startingValue += count;
+			} else {
+				count = countValue[0];
+			}
+			startingValue += count;
+			element.textContent = startingValue;
+		} else {
+			clearInterval(idInterval);
+		}
+	}, interval);
+};
+
