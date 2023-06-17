@@ -1,5 +1,5 @@
 
-import { animate,isNumber } from '/modules/helpers';
+import { animate,validations } from '/modules/helpers';
 
 const calculator = (price=100) => {
 	const calcBlock = document.querySelector('.calc-block'),
@@ -46,7 +46,7 @@ const calculator = (price=100) => {
 	calcInput.forEach(el => {
 		el.addEventListener('input', (e) => { 
 			e.preventDefault();
-			isNumber(el);
+			validations.isNumber(el);
 		});
 	});
 	

@@ -1,4 +1,4 @@
-import { validations,sendData } from "/modules/helpers";
+import { validations,validationForm,sendData } from "/modules/helpers";
 //https://jsonplaceholder.typicode.com/posts
 
 export const sendForm = ({ formId, someElem = [] }) => {
@@ -9,33 +9,20 @@ export const sendForm = ({ formId, someElem = [] }) => {
 		errorText: 'Error...',
 		successText: 'Success'
 	};
-	const validation = (formInputs, functions) => {
-		const arr = [];
-		formInputs.forEach(el => {
-			if (functions.hasOwnProperty(el.name)) {
-				const obj = {};
-				obj[functions[el.name](el)] =el.name ;
-				arr.push(obj);
-			}
-		});
-		console.log(arr);
-		return arr;
-	};
-	
+
 	const submitForm = () => {
 		const formElements = form.querySelectorAll('input');
 		const formData = new FormData(form);
 		const formBody = {};
 		const bool = true;
-	
-		
-		
+		const val = validationForm(formElements, validations);
 		
 		form.append(statusBlock);
 
 		formData.forEach((key, val) => {
 			formBody[key] = val;
 		});
+
 		someElem.forEach(el => {
 			const element = document.getElementById(el.id)
 			if (el.type === "block") {
@@ -45,11 +32,13 @@ export const sendForm = ({ formId, someElem = [] }) => {
 				formBody[el.id] = element.value;
 			}
 		});
-		const val = validation(formElements, validations);
+
+		
+
 		if (val.some(el => el.hasOwnProperty(bool))) {
-			const array = val.filter(el => el.hasOwnProperty(bool));
+			const arrayErrors = val.filter(el => el.hasOwnProperty(bool));
 			statusBlock.innerHTML = '';
-			array.forEach(elem => { 
+			arrayErrors.forEach(elem => { 
 				statusBlock.insertAdjacentHTML('afterbegin', ` Ошибка ввода данных в input ${elem[bool]}`);
 				setTimeout(() => {statusBlock.innerHTML = ''; },2000);
 			}); 
@@ -62,6 +51,7 @@ export const sendForm = ({ formId, someElem = [] }) => {
 			el.value = '';
 		});
 	};
+
 	try {
 		if (!form) {
 			throw new Error('Ошибка нет формы');
